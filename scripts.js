@@ -39,7 +39,6 @@ const data = [
 
 
 
-//find all unique tags from data brute force
 function getUniqueTagsBruteForce(data) {
     let tags = []
     data.forEach((item) => {
@@ -51,7 +50,31 @@ function getUniqueTagsBruteForce(data) {
     })
     return tags
 }
+
+function getUniqueTagsUsingSet(data) {
+    let tags = new Set()
+    data.forEach((item) => {
+        item.tags.forEach((tag) => {
+            tags.add(tag)
+        })
+    })
+    return tags
+}
+
+function getUniqueTags(data) {
+    const flatendTags = data.map(item=>item.tags).flat();
+    const uniqueTags = flatendTags.filter((item,index)=>flatendTags.indexOf(item)===index);
+    return uniqueTags;
+}
+
+
+
+
 console.log(data);
 
-console.log(getUniqueTagsBruteForce(data));
+
+
+console.log('brute force',getUniqueTagsBruteForce(data));
+console.log('using set',getUniqueTagsUsingSet(data));
+console.log('best solution ',getUniqueTags(data));
 
